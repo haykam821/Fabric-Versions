@@ -116,6 +116,41 @@ class AppUnstyled extends React.Component {
 }
 
 const App = styled(AppUnstyled)`
+	background-color: #eeeeee;
 	font-family: sans-serif;
+	padding: 32px;
+
+	h1 {
+		margin: 0;
+		padding: 8px;
+	}
+
+	p, h1 {
+		color: black;
+	}
+
+	p > code {
+		background-color: #fafafa;
+		padding: 4px;
+		border-radius: 4px;
+	}
+
+	pre > code {
+		border-radius: 4px;
+		padding: 12px;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		background-color: #161616;
+
+		p, h1 {
+			color: white;
+		}
+		
+		p > code {
+				background-color: #282c34;
+			}
+		}
+	}
 `;
 module.exports = App;
