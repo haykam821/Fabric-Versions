@@ -68,7 +68,6 @@ class AppUnstyled extends React.Component {
 		const apiXML = JSON.parse(xml(apiText));
 
 		const apiVersions = apiXML.elements[0].elements[2].elements[1].elements;
-		window.e = apiXML.elements[0].elements[2].elements[1].elements;
 		this.setState({
 			api: apiVersions[apiVersions.length - 1].elements[0].text,
 			apiMaven: value.startsWith("1.14") ? "net.fabricmc:fabric:" : "net.fabricmc.fabric-api:fabric-api:",
@@ -77,14 +76,14 @@ class AppUnstyled extends React.Component {
 
 	componentDidMount() {
 		this.changeVersion({
-			value: "1.14.4",
+			value: "1.15",
 		});
 	}
 
 	render() {
 		return <div className={this.props.className}>
 			<h1>Fabric Versions</h1>
-			<AsyncSelect defaultInputValue="1.14.4" onChange={this.changeVersion} cacheOptions defaultOptions loadOptions={async () => {
+			<AsyncSelect defaultInputValue="1.15" onChange={this.changeVersion} cacheOptions defaultOptions loadOptions={async () => {
 				const verResponse = await fetch("https://meta.fabricmc.net/v2/versions/game");
 				const versions = await verResponse.json();
 
