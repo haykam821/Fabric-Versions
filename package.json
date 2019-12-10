@@ -4,7 +4,7 @@
 	"description": "A webapp that shows the latest versions of Fabric and its components.",
 	"main": "./src/index.jsx",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"build": "webpack --config webpack.config.js"
 	},
 	"repository": {
 		"type": "git",
@@ -20,5 +20,12 @@
 	"bugs": {
 		"url": "https://github.com/haykam821/Fabric-Versions/issues"
 	},
-	"homepage": "https://github.com/haykam821/Fabric-Versions#readme"
+	"homepage": "https://github.com/haykam821/Fabric-Versions#readme",
+	"devDependencies": {
+		"file-loader": "^5.0.2",
+		"html-minify-loader": "^1.4.0",
+		"jsx-loader": "^0.13.2",
+		"webpack": "^4.41.2",
+		"webpack-cli": "^3.3.10"
+	}
 }
