@@ -1,0 +1,24 @@
+{
+	"name": "fabric-versions",
+	"version": "1.0.0",
+	"description": "A webapp that shows the latest versions of Fabric and its components.",
+	"main": "./src/index.jsx",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/haykam821/Fabric-Versions.git"
+	},
+	"keywords": [
+		"fabric",
+		"minecraft",
+		"webapp"
+	],
+	"author": "haykam821",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/haykam821/Fabric-Versions/issues"
+	},
+	"homepage": "https://github.com/haykam821/Fabric-Versions#readme"
+}
