@@ -27,5 +27,13 @@
 		"jsx-loader": "^0.13.2",
 		"webpack": "^4.41.2",
 		"webpack-cli": "^3.3.10"
+	},
+	"dependencies": {
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0",
+		"react-highlight.js": "^1.0.7",
+		"react-select": "^3.0.8",
+		"styled-components": "^4.4.1",
+		"xml-js": "^1.6.11"
 	}
 }
