@@ -42,6 +42,12 @@ class AppUnstyled extends React.Component {
 		].join("\n");
 	}
 
+	findByName(elements, name) {
+		return elements.find(child => {
+			return child.name === name;
+		})
+	}
+
 	async changeVersion({ value }) {
 		// Set Minecraft version
 		this.setState({
@@ -67,7 +73,11 @@ class AppUnstyled extends React.Component {
 		const apiText = await apiResponse.text();
 		const apiXML = JSON.parse(xml(apiText));
 
-		const apiVersions = apiXML.elements[0].elements[2].elements[1].elements;
+		const metadataNode = this.findByName(apiXML.elements, "metadata");
+		const versioningNode = this.findByName(metadataNode.elements, "versioning");
+		const versionsNode = this.findByName(versioningNode.elements, "versions");
+		const apiVersions = versionsNode.elements;
+
 		this.setState({
 			api: apiVersions[apiVersions.length - 1].elements[0].text,
 			apiMaven: value.startsWith("1.14") ? "net.fabricmc:fabric:" : "net.fabricmc.fabric-api:fabric-api:",
