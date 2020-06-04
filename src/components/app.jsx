@@ -93,11 +93,14 @@ class AppUnstyled extends React.Component {
 	render() {
 		return <div className={this.props.className}>
 			<h1>Fabric Versions</h1>
-			<AsyncSelect defaultInputValue="1.15" onChange={this.changeVersion} cacheOptions defaultOptions loadOptions={async () => {
+			<AsyncSelect defaultInputValue="1.15" onChange={this.changeVersion} cacheOptions defaultOptions loadOptions={async query => {
+
 				const verResponse = await fetch("https://meta.fabricmc.net/v2/versions/game");
 				const versions = await verResponse.json();
 
-				return versions.map(({ version, stable }) => ({
+				return versions.filter(({ version }) => {
+					return version.includes(query);
+				}).map(({ version, stable }) => ({
 					label: version + (stable ? "" : " (unstable)"),
 					value: version,
 				}));
