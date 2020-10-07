@@ -1,10 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-
-import { xml2json as xml, Element } from "xml-js";
+import { Element, xml2json as xml } from "xml-js";
 
 import AsyncSelect from "react-select/async";
 import Highlight from "react-highlight.js";
+import React from "react";
+import styled from "styled-components";
 
 interface AppState {
 	version?: string;
@@ -23,18 +22,18 @@ interface Version {
 	stable: boolean;
 }
 
-class AppUnstyled extends React.Component<{}, AppState> {
-	constructor(props: Readonly<{}>) {
+class AppUnstyled extends React.Component<Record<string, unknown>, AppState> {
+	constructor(props: Readonly<Record<string, unknown>>) {
 		super(props);
 
 		this.state = {
-			version: null,
-			yarn: "LOADING",
-			loader: "LOADING",
 			api: "LOADING",
 			apiMaven: "net.fabricmc:fabric:",
+			loader: "LOADING",
+			version: null,
+			yarn: "LOADING",
 		};
-		
+
 		this.getPropertiesContents = this.getPropertiesContents.bind(this);
 		this.getDependenciesContents = this.getDependenciesContents.bind(this);
 
@@ -62,7 +61,7 @@ class AppUnstyled extends React.Component<{}, AppState> {
 	findByName(elements: Element[], name: string): Element {
 		return elements.find(child => {
 			return child.name === name;
-		})
+		});
 	}
 
 	async changeVersion({ value }: { value: string }): Promise<void> {
@@ -108,7 +107,7 @@ class AppUnstyled extends React.Component<{}, AppState> {
 	}
 
 	render(): JSX.Element {
-		return <div className={(this.props as AppProps).className}>
+		return <div className={(this.props as unknown as AppProps).className}>
 			<h1>Fabric Versions</h1>
 			<AsyncSelect defaultInputValue="1.15" onChange={this.changeVersion} cacheOptions defaultOptions loadOptions={async (query: string) => {
 
