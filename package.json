@@ -4,7 +4,8 @@
 	"description": "A webapp that shows the latest versions of Fabric and its components.",
 	"main": "./src/index.jsx",
 	"scripts": {
-		"build": "webpack --config webpack.config.js"
+		"build": "webpack --config webpack.config.js",
+		"lint": "eslint \"./**/*.js\" \"./**/*.tsx\" --ignore-path .gitignore"
 	},
 	"repository": {
 		"type": "git",
@@ -28,6 +29,15 @@
 		"@types/react-select": "^3.0.21",
 		"@types/styled-components": "^5.1.3",
 		"@types/webpack-env": "^1.15.3",
+		"@typescript-eslint/eslint-plugin": "^4.4.0",
+		"@typescript-eslint/parser": "^4.4.0",
+		"eslint": "^6.8.0",
+		"eslint-config-haykam": "^1.8.0",
+		"eslint-plugin-extra-rules": "0.0.0-development",
+		"eslint-plugin-html": "^6.1.0",
+		"eslint-plugin-json": "^1.4.0",
+		"eslint-plugin-markdown": "^1.0.2",
+		"eslint-plugin-unicorn": "^10.0.0",
 		"file-loader": "^5.0.2",
 		"fork-ts-checker-webpack-plugin": "^5.2.0",
 		"html-minify-loader": "^1.4.0",
@@ -44,5 +54,41 @@
 		"react-select": "^3.0.8",
 		"styled-components": "^4.4.1",
 		"xml-js": "^1.6.11"
+	},
+	"eslintConfig": {
+		"extends": [
+			"eslint-config-haykam",
+			"plugin:@typescript-eslint/eslint-recommended",
+			"plugin:@typescript-eslint/recommended"
+		],
+		"parser": "@typescript-eslint/parser",
+		"plugins": [
+			"@typescript-eslint"
+		],
+		"rules": {
+			"valid-jsdoc": [
+				"error",
+				{
+					"prefer": {
+						"arg": "param",
+						"argument": "param",
+						"return": "returns"
+					},
+					"preferType": {
+						"object": "Object"
+					},
+					"requireParamDescription": true,
+					"requireParamType": false,
+					"requireReturn": false,
+					"requireReturnDescription": false,
+					"requireReturnType": false
+				}
+			],
+			"semi": "off",
+			"@typescript-eslint/semi": "error",
+			"no-shadow": "off",
+			"@typescript-eslint/no-shadow": "error",
+			"sort-imports": "error"
+		}
 	}
 }
