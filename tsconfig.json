@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"downlevelIteration": true,
+		"esModuleInterop": true,
+		"jsx": "react",
+		"lib": [
+			"es2020",
+			"dom"
+		],
+		"module": "es2020",
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"outDir": "./dist",
+		"target": "es5",
+		"types": [
+			"react",
+			"react-dom",
+			"react-highlight.js",
+			"react-select",
+			"styled-components",
+			"webpack-env"
+		]
+	}
+}

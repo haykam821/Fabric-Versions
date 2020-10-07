@@ -1,13 +1,30 @@
-const React = require("react");
-const styled = require("styled-components").default;
+import React from "react";
+import styled from "styled-components";
 
-const xml = require("xml-js").xml2json;
+import { xml2json as xml, Element } from "xml-js";
 
-const AsyncSelect = require("react-select/async").default;
-const Highlight = require("react-highlight.js").default;
+import AsyncSelect from "react-select/async";
+import Highlight from "react-highlight.js";
 
-class AppUnstyled extends React.Component {
-	constructor(props) {
+interface AppState {
+	version?: string;
+	yarn: string;
+	loader: string;
+	api: string;
+	apiMaven: string;
+}
+
+interface AppProps {
+	className: string;
+}
+
+interface Version {
+	version: string;
+	stable: boolean;
+}
+
+class AppUnstyled extends React.Component<{}, AppState> {
+	constructor(props: Readonly<{}>) {
 		super(props);
 
 		this.state = {
@@ -24,7 +41,7 @@ class AppUnstyled extends React.Component {
 		this.changeVersion = this.changeVersion.bind(this);
 	}
 
-	getDependenciesContents() {
+	getDependenciesContents(): string {
 		return "dependencies {\n" + [
 			`\tminecraft "com.mojang:minecraft:${this.state.version}"`,
 			`\tmappings "net.fabricmc:yarn:${this.state.yarn}:v2"`,
@@ -33,7 +50,7 @@ class AppUnstyled extends React.Component {
 		].join("\n") + "\n}";
 	}
 
-	getPropertiesContents() {
+	getPropertiesContents(): string {
 		return [
 			"minecraft_version=" + this.state.version,
 			"yarn_mappings=" + this.state.yarn,
@@ -42,13 +59,13 @@ class AppUnstyled extends React.Component {
 		].join("\n");
 	}
 
-	findByName(elements, name) {
+	findByName(elements: Element[], name: string): Element {
 		return elements.find(child => {
 			return child.name === name;
 		})
 	}
 
-	async changeVersion({ value }) {
+	async changeVersion({ value }: { value: string }): Promise<void> {
 		// Set Minecraft version
 		this.setState({
 			version: value,
@@ -79,24 +96,24 @@ class AppUnstyled extends React.Component {
 		const apiVersions = versionsNode.elements;
 
 		this.setState({
-			api: apiVersions[apiVersions.length - 1].elements[0].text,
+			api: apiVersions[apiVersions.length - 1].elements[0].text as string,
 			apiMaven: value.startsWith("1.14") ? "net.fabricmc:fabric:" : "net.fabricmc.fabric-api:fabric-api:",
 		});
 	}
 
-	componentDidMount() {
+	componentDidMount(): void {
 		this.changeVersion({
 			value: "1.15",
 		});
 	}
 
-	render() {
-		return <div className={this.props.className}>
+	render(): JSX.Element {
+		return <div className={(this.props as AppProps).className}>
 			<h1>Fabric Versions</h1>
-			<AsyncSelect defaultInputValue="1.15" onChange={this.changeVersion} cacheOptions defaultOptions loadOptions={async query => {
+			<AsyncSelect defaultInputValue="1.15" onChange={this.changeVersion} cacheOptions defaultOptions loadOptions={async (query: string) => {
 
 				const verResponse = await fetch("https://meta.fabricmc.net/v2/versions/game");
-				const versions = await verResponse.json();
+				const versions: Version[] = await verResponse.json();
 
 				return versions.filter(({ version }) => {
 					return version.includes(query);
@@ -165,4 +182,4 @@ const App = styled(AppUnstyled)`
 		}
 	}
 `;
-module.exports = App;
+export default App;
