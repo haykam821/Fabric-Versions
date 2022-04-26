@@ -95,8 +95,7 @@ class AppUnstyled extends React.Component<Record<string, unknown>, AppState> {
 		const apiVersions = versionsNode.elements;
 
 		this.setState({
-			/* eslint-disable-next-line unicorn/prefer-at */
-			api: apiVersions[apiVersions.length - 1].elements[0].text as string,
+			api: apiVersions.at(-1).elements[0].text as string,
 			apiMaven: value.startsWith("1.14") ? "net.fabricmc:fabric:" : "net.fabricmc.fabric-api:fabric-api:",
 		});
 	}
