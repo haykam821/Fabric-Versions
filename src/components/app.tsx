@@ -95,6 +95,7 @@ class AppUnstyled extends React.Component<Record<string, unknown>, AppState> {
 		const apiVersions = versionsNode.elements;
 
 		this.setState({
+			/* eslint-disable-next-line unicorn/prefer-at */
 			api: apiVersions[apiVersions.length - 1].elements[0].text as string,
 			apiMaven: value.startsWith("1.14") ? "net.fabricmc:fabric:" : "net.fabricmc.fabric-api:fabric-api:",
 		});
@@ -110,7 +111,6 @@ class AppUnstyled extends React.Component<Record<string, unknown>, AppState> {
 		return <div className={(this.props as unknown as AppProps).className}>
 			<h1>Fabric Versions</h1>
 			<AsyncSelect defaultInputValue="1.15" onChange={this.changeVersion} cacheOptions defaultOptions loadOptions={async (query: string) => {
-
 				const verResponse = await fetch("https://meta.fabricmc.net/v2/versions/game");
 				const versions: Version[] = await verResponse.json();
 
